@@ -1,0 +1,39 @@
+CREATE TABLE sn_users
+( id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  full_name VARCHAR(50) NOT NULL,
+  about_text VARCHAR(150) NOT NULL
+)ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE sn_followers (
+  user_id BIGINT(20) NOT NULL,
+  followed_user_id BIGINT(20) NOT NULL,
+  CONSTRAINT PK_FOLLOWERS PRIMARY KEY (user_id, followed_user_id),
+  FOREIGN KEY (user_id) REFERENCES sn_users(id),
+  FOREIGN KEY (followed_user_id) REFERENCES sn_users(id)
+)ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+CREATE TABLE sn_locations (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  city VARCHAR(50) NOT NULL,
+  country VARCHAR(50) NOT NULL,
+  user_id BIGINT(20) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES sn_users(id)
+)ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE sn_posts (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  text VARCHAR(250) NOT NULL,
+  likes INT NOT NULL DEFAULT 0,
+  user_id BIGINT(20) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES sn_users(id)
+)ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE sn_messages (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  text VARCHAR(250) NOT NULL,
+  from_user_id BIGINT(20) NOT NULL,
+  to_user_id BIGINT(20) NOT NULL,
+  FOREIGN KEY (from_user_id) REFERENCES sn_users(id),
+  FOREIGN KEY (to_user_id) REFERENCES sn_users(id)
+)ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
