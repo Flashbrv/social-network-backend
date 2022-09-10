@@ -1,8 +1,11 @@
 package com.example.backend.service;
 
 import com.example.backend.entity.UserEntity;
+import com.example.backend.mapper.UserMapper;
+import com.example.backend.mapper.UserProfileMapper;
 import com.example.backend.model.Location;
 import com.example.backend.model.User;
+import com.example.backend.model.UserProfile;
 import com.example.backend.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,19 +20,23 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserEntityRepository repository;
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private UserProfileMapper profileMapper;
+
     @Override
     public Page<User> getAllUsers(Integer pageNumber, Integer itemsCount) {
         PageRequest pageRequest = PageRequest.of(pageNumber, itemsCount);
 
         Page<UserEntity> userEntitiesPage = repository.findAll(pageRequest);
-        Page<User> usersPage = userEntitiesPage.map(u -> {
-            User user = new User();
-            user.setId(u.getId());
-            user.setFullName(u.getFullName());
-            user.setAboutText(u.getAboutText());
-            user.setLocation(new Location(u.getLocation().getCity(), u.getLocation().getCountry()));
-            return user;
-        });
+        Page<User> usersPage = userEntitiesPage.map(userMapper::toModel);
         return usersPage;
+    }
+
+    @Override
+    public UserProfile getUserProfile(Long userId) {
+        return profileMapper.toModel(repository.findById(userId).get());
     }
 }
