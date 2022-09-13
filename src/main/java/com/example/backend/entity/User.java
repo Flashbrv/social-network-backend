@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name="sn_users")
-public class UserEntity {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -18,7 +18,7 @@ public class UserEntity {
     private String aboutText;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private LocationEntity location;
+    private Location location;
 
     @Column(name = "looking_for_job")
     private boolean lookingForAJob;
@@ -43,10 +43,10 @@ public class UserEntity {
     @Column(name = "photo_large", length = 2048, nullable = true)
     private String photoLarge;
 
-    public UserEntity() {
+    public User() {
     }
 
-    public UserEntity(String fullName, String aboutText) {
+    public User(String fullName, String aboutText) {
         this.fullName = fullName;
         this.aboutText = aboutText;
     }
@@ -75,11 +75,11 @@ public class UserEntity {
         this.aboutText = aboutText;
     }
 
-    public LocationEntity getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(LocationEntity location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
@@ -175,7 +175,7 @@ public class UserEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
+        User that = (User) o;
         return id == that.id &&
                 lookingForAJob == that.lookingForAJob &&
                 fullName.equals(that.fullName) &&

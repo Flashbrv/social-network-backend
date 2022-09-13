@@ -1,6 +1,6 @@
-package com.example.backend.model;
+package com.example.backend.dto;
 
-public class Contacts {
+public class ContactsDto {
     public String github;
     public String facebook;
     public String instagram;

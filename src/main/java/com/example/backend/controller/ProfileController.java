@@ -1,6 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.UserProfile;
+import com.example.backend.dto.UserProfileDto;
 import com.example.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ public class ProfileController {
     private UserService service;
 
     @GetMapping("{id}")
-    public ResponseEntity<UserProfile> findUserProfile(@PathVariable Long id) {
+    public ResponseEntity<UserProfileDto> findUserProfile(@PathVariable Long id) {
         return ResponseEntity.ok(service.getUserProfile(id));
     }
 }

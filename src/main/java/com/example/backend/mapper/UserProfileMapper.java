@@ -1,7 +1,7 @@
 package com.example.backend.mapper;
 
-import com.example.backend.entity.UserEntity;
-import com.example.backend.model.UserProfile;
+import com.example.backend.dto.UserProfileDto;
+import com.example.backend.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -19,6 +19,6 @@ public abstract class UserProfileMapper {
             @Mapping(source = "photoSmall", target = "photos.small"),
             @Mapping(source = "photoLarge", target = "photos.large")
     })
-    public abstract UserProfile toModel(UserEntity entity);
+    public abstract UserProfileDto toModel(User entity);
 
 }

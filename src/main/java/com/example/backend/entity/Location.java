@@ -5,14 +5,14 @@ import java.util.Objects;
 
 @Entity
 @Table(name="sn_locations")
-public class LocationEntity {
+public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
     @OneToOne()
-    private UserEntity user;
+    private User user;
 
     @Column(name = "city", length = 50, nullable = false)
     private String city;
@@ -28,11 +28,11 @@ public class LocationEntity {
         this.id = id;
     }
 
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -56,7 +56,7 @@ public class LocationEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LocationEntity that = (LocationEntity) o;
+        Location that = (Location) o;
         return id == that.id && user.equals(that.user) && city.equals(that.city) && country.equals(that.country);
     }
 

@@ -1,11 +1,11 @@
-package com.example.backend.model;
+package com.example.backend.dto;
 
-public class UserProfile {
+public class UserProfileDto {
     public long id;
     public String fullName;
     public String aboutText;
     public boolean lookingForAJob;
     public String lookingForAJobDescription;
-    public Contacts contacts;
-    public Photo photos;
+    public ContactsDto contacts;
+    public PhotoDto photos;
 }
