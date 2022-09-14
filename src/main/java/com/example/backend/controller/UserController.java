@@ -5,6 +5,7 @@ import com.example.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class UserController {
     private UserService service;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('developers:read')")
     public ResponseEntity<Page<UserDto>> findAll(@RequestParam(name="pageNumber", defaultValue = "0") Integer pageNumber,
                                                  @RequestParam(name = "itemsCount", defaultValue = "10") Integer itemsCount) {
         return ResponseEntity.ok(service.getAllUsers(pageNumber, itemsCount));

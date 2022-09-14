@@ -1,8 +1,11 @@
 package com.example.backend.entity;
 
-import javax.persistence.*;
-import java.util.Objects;
+import lombok.Data;
 
+import javax.persistence.*;
+
+
+@Data
 @Entity
 @Table(name="sn_users")
 public class User {
@@ -11,10 +14,24 @@ public class User {
     @Column(name = "id")
     private long id;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
+
     @Column(name = "full_name", length = 50, nullable = false)
     private String fullName;
 
-    @Column(name = "about_text", length = 150, nullable = false)
+    @Column(name = "about_text", length = 255, nullable = true)
     private String aboutText;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -42,194 +59,4 @@ public class User {
     private String photoSmall;
     @Column(name = "photo_large", length = 2048, nullable = true)
     private String photoLarge;
-
-    public User() {
-    }
-
-    public User(String fullName, String aboutText) {
-        this.fullName = fullName;
-        this.aboutText = aboutText;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getAboutText() {
-        return aboutText;
-    }
-
-    public void setAboutText(String aboutText) {
-        this.aboutText = aboutText;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public boolean isLookingForAJob() {
-        return lookingForAJob;
-    }
-
-    public void setLookingForAJob(boolean lookingForAJob) {
-        this.lookingForAJob = lookingForAJob;
-    }
-
-    public String getLookingForAJobDescription() {
-        return lookingForAJobDescription;
-    }
-
-    public void setLookingForAJobDescription(String lookingForAJobDescription) {
-        this.lookingForAJobDescription = lookingForAJobDescription;
-    }
-
-    public String getGithub() {
-        return github;
-    }
-
-    public void setGithub(String github) {
-        this.github = github;
-    }
-
-    public String getFacebook() {
-        return facebook;
-    }
-
-    public void setFacebook(String facebook) {
-        this.facebook = facebook;
-    }
-
-    public String getInstagram() {
-        return instagram;
-    }
-
-    public void setInstagram(String instagram) {
-        this.instagram = instagram;
-    }
-
-    public String getTwitter() {
-        return twitter;
-    }
-
-    public void setTwitter(String twitter) {
-        this.twitter = twitter;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public String getYoutube() {
-        return youtube;
-    }
-
-    public void setYoutube(String youtube) {
-        this.youtube = youtube;
-    }
-
-    public String getLinkedIn() {
-        return linkedIn;
-    }
-
-    public void setLinkedIn(String linkedIn) {
-        this.linkedIn = linkedIn;
-    }
-
-    public String getPhotoSmall() {
-        return photoSmall;
-    }
-
-    public void setPhotoSmall(String photoSmall) {
-        this.photoSmall = photoSmall;
-    }
-
-    public String getPhotoLarge() {
-        return photoLarge;
-    }
-
-    public void setPhotoLarge(String photoLarge) {
-        this.photoLarge = photoLarge;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User that = (User) o;
-        return id == that.id &&
-                lookingForAJob == that.lookingForAJob &&
-                fullName.equals(that.fullName) &&
-                aboutText.equals(that.aboutText) &&
-                location.equals(that.location) &&
-                Objects.equals(lookingForAJobDescription, that.lookingForAJobDescription) &&
-                Objects.equals(github, that.github) &&
-                Objects.equals(facebook, that.facebook) &&
-                Objects.equals(instagram, that.instagram) &&
-                Objects.equals(twitter, that.twitter) &&
-                Objects.equals(website, that.website) &&
-                Objects.equals(youtube, that.youtube) &&
-                Objects.equals(linkedIn, that.linkedIn) &&
-                Objects.equals(photoSmall, that.photoSmall) &&
-                Objects.equals(photoLarge, that.photoLarge);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id,
-                fullName,
-                aboutText,
-                location,
-                lookingForAJob,
-                lookingForAJobDescription,
-                github,
-                facebook,
-                instagram,
-                twitter,
-                website,
-                youtube,
-                linkedIn,
-                photoSmall,
-                photoLarge);
-    }
-
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", aboutText='" + aboutText + '\'' +
-                ", location=" + location +
-                ", lookingForAJob=" + lookingForAJob +
-                ", lookingForAJobDescription='" + lookingForAJobDescription + '\'' +
-                ", github='" + github + '\'' +
-                ", facebook='" + facebook + '\'' +
-                ", instagram='" + instagram + '\'' +
-                ", twitter='" + twitter + '\'' +
-                ", website='" + website + '\'' +
-                ", youtube='" + youtube + '\'' +
-                ", linkedIn='" + linkedIn + '\'' +
-                ", photoSmall='" + photoSmall + '\'' +
-                ", photoLarge='" + photoLarge + '\'' +
-                '}';
-    }
 }
