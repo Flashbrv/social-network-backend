@@ -10,4 +10,6 @@ import java.util.Map;
 public interface AuthService {
     Map<Object, Object> login(AuthenticationRequestDto request);
     void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication);
+
+    Long getCurrentLoggedUserId();
 }
